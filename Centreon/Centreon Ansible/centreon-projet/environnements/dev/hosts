@@ -1,0 +1,5 @@
+[centreon_central]
+
+[centreon_sgbd]
+
+[centreon_poller]

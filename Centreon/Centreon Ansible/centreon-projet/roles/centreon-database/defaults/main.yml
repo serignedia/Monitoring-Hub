@@ -1,0 +1,3 @@
+centreon_package_version: 21.04.0
+centreon_database_centreon_cnf_file: "{{ role_path }}/files/centreon.cnf"
+centreon_database_server_cnf_file: "{{ role_path }}/files/server.cnf"

@@ -1,0 +1,48 @@
+---
+# tasks file for create-logical-volumes
+# requirements lvm2 package must to be installed
+
+- name: Create the "{{ vg_name }}" Volume group.
+  lvg:
+    pvs: "{{ raw_disks }}"
+    vg: "{{ vg_name }}"
+    pesize: "8"
+    pv_options: '-Z y'
+    force: no
+    state: present
+
+- name: Create logical volumes
+  lvol:
+    vg: "{{ vg_name }}"
+    lv: "{{ item.lv_name }}"
+    size: "{{ item.require_lv_size }}"
+    active: yes
+    force: no
+    state: present
+  with_items: "{{ lv_elements }}"
+
+
+- name: Create filesystems on lvm
+  filesystem:
+    fstype: "{{ item.fs }}"
+    dev: "/dev/mapper/{{ vg_name }}-{{ item.lv_name }}"
+    force: no
+  with_items: "{{ lv_elements }}"
+
+- name: Create directories to mount the filesystems
+  file:
+    path: "{{ item.mount_point }}"
+    state: directory
+    mode: '0755'
+  with_items: "{{ lv_elements }}"
+  when: item.create_mount_point == true
+
+
+- name: Mount the created filesystems
+  mount:
+    path: "{{ item.mount_point }}"
+    src: "/dev/mapper/{{ vg_name}}-{{ item.lv_name}}"
+    fstype: "{{ item.fs }}"
+    opts: rw
+    state: mounted
+  with_items: "{{ lv_elements }}"

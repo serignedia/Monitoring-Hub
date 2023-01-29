@@ -1,0 +1,61 @@
+#- include: add_repo.yml
+
+- name: Epel Release
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install software collections repository
+  yum:
+    name: centos-release-scl
+    state: present
+#    disablerepo: "*"
+#    enablerepo: "{{ centreon_local_repo_id }}"
+
+- name: centreon online repo
+  yum:
+    name: "{{ centreon_online_repo_rpm }}"
+    state: present 
+
+- name: Install net-snmp-utils version {{ net_snmp_utils_package_version }}
+  yum:
+    name: net-snmp-utils-{{ net_snmp_utils_package_version }}
+    state: present
+#    disablerepo: "*"
+#    enablerepo: "{{ centreon_local_repo_id }}"
+
+- name: Install MySQL-python
+  yum:
+    name: MySQL-python
+    state: present
+ #   disablerepo: "*"
+ #   enablerepo: "{{ requirement_local_repo_id }}"
+
+- name: Install net-tools
+  yum:
+    name: net-tools
+    state: present
+#    disablerepo: "*"
+#   enablerepo: "{{ requirement_local_repo_id }}"
+
+- name: Install python3
+  yum:
+    name: python3
+    state: present
+#    disablerepo: "*"
+#    enablerepo: "{{ requirement_local_repo_id }}"
+
+- name: Copy pexpect library and dependencies on remote machine
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/
+  with_items:
+    - "{{ role_path }}/files/pexpect-4.8.0-py2.py3-none-any.whl"
+    -  "{{ role_path }}/files/ptyprocess-0.7.0-py2.py3-none-any.whl"
+  
+
+- name: install pexpect dependencies
+  shell: python3 -m pip install --user /tmp/ptyprocess-0.7.0-py2.py3-none-any.whl
+
+- name: install pexpect 
+  shell: python3 -m pip install --user /tmp/pexpect-4.8.0-py2.py3-none-any.whl

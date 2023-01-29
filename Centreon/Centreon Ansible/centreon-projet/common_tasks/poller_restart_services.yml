@@ -1,0 +1,23 @@
+- name: Restart centreon poller services
+  service: 
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - snmpd 
+    - snmptrapd
+    - centreon
+    - gorgoned
+    - centreontrapd
+    - centengine
+
+- name: Checking if a file centreontrapd.sdb exists
+  stat:
+    path: /etc/snmp/centreon_traps/centreontrapd.sdb
+  register: centreontrapd_sdb
+
+- name: Ensure centreontrapd.sdb group and ownership is centreon-gorgone
+  file:
+    path: /etc/snmp/centreon_traps/centreontrapd.sdb
+    owner: centreon-gorgone
+    group: centreon-gorgone
+  when: (centreontrapd_sdb.stat.exists) and (centreontrapd_sdb.stat.gr_name == "centreon") and (centreontrapd_sdb.stat.pw_name == "centreon")

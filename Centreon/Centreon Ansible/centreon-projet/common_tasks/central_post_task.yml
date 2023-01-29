@@ -1,0 +1,22 @@
+- name: create centreon .ssh directory
+  file:
+    path: /var/spool/centreon/.ssh
+    state: directory
+    owner: centreon
+    group: centreon
+
+
+- name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
+  community.crypto.openssh_keypair:
+    path: /var/spool/centreon/.ssh/id_rsa
+    owner: centreon
+    group: centreon
+
+- name: Validate the sudoers file before saving
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/centreon
+    state: present
+    regexp: '^Defaults:CENTREON'
+    line: 'Defaults:CENTREON !requiretty,!noexec'
+    validate: /usr/sbin/visudo -cf %s
+

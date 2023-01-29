@@ -1,0 +1,24 @@
+- hosts: centreon_sgbd
+  become: true
+  become_method: sudo
+  roles:
+    - common-packages
+    - disable-selinux-firewalld
+    - centreon-database
+  post_tasks:
+    - name: Grant access to database
+      import_tasks: "{{ playbook_dir }}/common_tasks/register_central_task.yml"
+
+
+- hosts: centreon_central
+  become: true
+  become_method: sudo
+  roles:
+    - common-packages
+    - disable-selinux-firewalld
+    - centreon-central
+  post_tasks:
+    - name: Central post tasks
+      import_tasks: "{{ playbook_dir }}/common_tasks/central_post_task.yml"
+    - name: Restart services
+      import_tasks: "{{ playbook_dir }}/common_tasks/central_restart_services.yml"

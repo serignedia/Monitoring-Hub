@@ -1,0 +1,8 @@
+
+
+- hosts: centreon_poller
+  become: true
+  become_method: sudo
+  tasks:
+    - name: Restart services
+      import_tasks: "{{ playbook_dir }}/common_tasks/poller_restart_services.yml"

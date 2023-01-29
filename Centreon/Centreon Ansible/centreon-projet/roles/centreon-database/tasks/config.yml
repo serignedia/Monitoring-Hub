@@ -1,0 +1,37 @@
+
+- name: Change file limit to mariadb
+  template: 
+    src: mariadb_centreon_service.conf.j2
+    dest: "/etc/systemd/system/mariadb.service.d/centreon.conf" 
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: Deploy centreon.cnf file
+  copy: 
+    src: "{{ centreon_database_centreon_cnf_file }}"
+    dest: "/etc/my.cnf.d/centreon.cnf" 
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: Deploy server.cnf file
+  copy: 
+    src: "{{ centreon_database_server_cnf_file }}"
+    dest: "/etc/my.cnf.d/server.cnf"
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: Reload deamon
+  shell: systemctl daemon-reload
+
+- name: Enable MariaDB service
+  service: 
+    name: mariadb
+    enabled: yes
+    
+- name: Restart MariaDB
+  service:
+    name: mariadb
+    state: restarted 

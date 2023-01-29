@@ -1,0 +1,24 @@
+- name: Register centreon central {{ centreon_central_admin_user }} on this poller
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  expect:
+    command: /usr/share/centreon/bin/registerServerTopology.sh -u {{ centreon_central_admin_user }} -t poller -h {{ centreon_central_ip_adress }} -n {{ centreon_poller_name }}
+    responses:
+      (.*)Please enter the password of(.*): "{{ centreon_central_admin_password }}"
+      (.*)Which IP do you want to use as CURRENT NODE IP \?(.*): "{{ centreon_poller_current_ip_number }}"
+      (.*)Do you want to register this server with those information\? \(y/n\)(.*): "{{ centreon_poller_register_central }}"
+
+- name: Put centreontrapd.pm content into /etc/centreon/conf.pm
+  shell: cat /etc/centreon/centreontrapd.pm > /etc/centreon/conf.pm
+    
+- name: Restart centreon poller services
+  service: 
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - snmpd 
+    - snmptrapd
+    - centreon
+    - gorgoned
+    - centreontrapd
+    - centengine

@@ -1,0 +1,3 @@
+centreon_poller_name: "{{ ansible_hostname }}"
+centreon_poller_current_ip_number: 1
+centreon_poller_register_central: y

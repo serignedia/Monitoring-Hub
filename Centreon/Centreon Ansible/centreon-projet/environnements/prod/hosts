@@ -1,0 +1,9 @@
+[centreon_central]
+
+192.168.33.26
+
+[centreon_sgbd]
+192.168.33.25
+
+[centreon_poller]
+192.168.33.28

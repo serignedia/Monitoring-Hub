@@ -1,0 +1,37 @@
+
+#- include: add_repo.yml
+
+- name: Install centreon-poller-centreon-engine packages
+  yum: 
+    name: centreon-poller-centreon-engine  
+    state: present
+#    disablerepo: "*"
+#    enablerepo: "{{ centreon_local_repo_id }}"
+    
+- name: Enable centreon poller services
+  service: 
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+    - snmpd 
+    - snmptrapd
+    - centreon
+    - gorgoned
+    - centreontrapd
+    - centengine
+
+
+- name: Restart centreon poller services
+  service: 
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - snmpd 
+    - snmptrapd
+    - centreon
+    - gorgoned
+    - centreontrapd
+    - centengine
+
+
+- include: config.yml

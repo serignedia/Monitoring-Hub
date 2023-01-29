@@ -1,0 +1,5 @@
+- hosts: centreon_sgbd, centreon_central, centreon_poller
+  become: true
+  become_method: sudo
+  roles:
+    - role: create-logical-volumes

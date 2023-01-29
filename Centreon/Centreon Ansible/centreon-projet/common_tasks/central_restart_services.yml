@@ -1,0 +1,15 @@
+- name: Restart centreon central services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - httpd24-httpd
+    - cbd
+    - snmpd 
+    - snmptrapd
+    - rh-php73-php-fpm 
+    - centreon
+    - gorgoned
+    - centreontrapd
+    - cbd
+    - centengine

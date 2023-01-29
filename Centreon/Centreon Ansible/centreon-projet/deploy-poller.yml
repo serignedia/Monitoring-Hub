@@ -1,0 +1,8 @@
+- hosts: centreon_poller
+  become: true
+  become_method: sudo
+
+  roles:
+    - common-packages
+    - disable-selinux-firewalld
+    - role: centreon-poller

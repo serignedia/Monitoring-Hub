@@ -1,0 +1,12 @@
+
+- name: Grant Central {{ item }} to MariaDB
+  command: 'mysql -ne "GRANT ALL PRIVILEGES ON *.* TO root@{{ item }} IDENTIFIED BY {{ quote }}{{ mysql_root_central_password }}{{ quote }} WITH GRANT OPTION"'
+  with_items: 
+    - "{{ centreon_central_ip_adress }}"
+  changed_when: False
+
+- name: Reload privilege tables
+  command: 'mysql -ne "{{ item }}"'
+  with_items:
+    - FLUSH PRIVILEGES
+  changed_when: False

@@ -1,0 +1,29 @@
+centreon_package_version: 21.04.0
+quote: "'"
+
+## Mettre les identifiants de connexion vers les nodes
+ansible_connection: ssh 
+ansible_ssh_user: root
+ansible_ssh_pass: centreon
+
+# Déterminer les identifiants de l'utilisateur root de la base de données
+mysql_root_password: test@centreon
+mysql_root_central_password: test@centreon
+
+# Déterminer les identifiants de l'utilisateur Centreon
+centreon_central_admin_user: admin
+centreon_central_admin_password: test@centreon
+
+#Pour l'enregistrement du poller vers le central, mettre l'ip du central
+centreon_central_ip_adress: 192.168.33.26
+
+# Dans le cas d'un dépot local, réseau inetrne client, sans accès internet, remplacer par le chemin du dépot local et décommenter
+#centreon_local_repo_dir: "/vagrant/depot_local/centreon"
+#requirement_local_repo_dir: "/vagrant/depot_local/prerequis"
+
+# Si accès internet mettre les chemins vers les dépots centreon
+centreon_online_repo_rpm: "https://yum.centreon.com/standard/21.04/el7/stable/noarch/RPMS/centreon-release-21.04-6.el7.centos.noarch.rpm"
+
+# id des repos
+requirement_local_repo_id: prerequisrepo
+centreon_local_repo_id: centreonrepo

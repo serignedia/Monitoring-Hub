@@ -1,0 +1,22 @@
+- name: Add prerequis repo file
+  template: 
+    src: prerequis_centos.repo.j2 
+    dest: /etc/yum.repos.d/prerequis.repo 
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: Add centreon repo file
+  template: 
+    src: centreon_centos.repo.j2 
+    dest: /etc/yum.repos.d/centreon.repo 
+    owner: root 
+    group: root 
+    mode: 0644
+
+
+#- name: Clean yum cache
+#  shell: yum clean all
+
+#- name: Clean yum cache
+#  shell: yum makecache

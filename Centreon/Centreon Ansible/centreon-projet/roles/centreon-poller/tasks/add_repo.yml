@@ -1,0 +1,35 @@
+
+#- name: Disable existing repositories
+#  shell: ls /etc/yum.repos.d/CentOS*.repo
+#  ignore_errors: yes
+#  register: repos_to_rename
+#  failed_when: repos_to_rename.rc == 2
+
+#- name: Rename .repo files
+#  shell: mv "{{ item }}" "{{ item }}.bak"
+#  with_items: "{{ repos_to_rename.stdout_lines }}"
+#  when: repos_to_rename.rc != 2
+
+
+- name: Add prerequis repo file
+  template: 
+    src: prerequis_centos.repo.j2 
+    dest: /etc/yum.repos.d/prerequis.repo 
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: Add centreon repo file
+  template: 
+    src: centreon_centos.repo.j2 
+    dest: /etc/yum.repos.d/centreon.repo 
+    owner: root 
+    group: root 
+    mode: 0644
+
+
+#- name: Clean yum cache
+#  shell: yum clean all
+
+#- name: Clean yum cache
+#  shell: yum makecache

@@ -1,0 +1,28 @@
+vg_name: "central_vg"
+#raw_disks: [ /dev/sda ]
+raw_disks: [ /dev/sdb ]
+
+lv_elements: 
+  - { 
+    lv_name: "lv_log",
+    require_lv_size: "10M",
+    fs: "xfs",
+    mount_point: "/var/log",
+    create_mount_point: true
+ }
+  - { 
+    lv_name: "lv_mysql",
+    require_lv_size: "30M",
+    fs: "xfs",
+    mount_point: "/var/lib/mysql",
+    create_mount_point: true
+ }
+  - { 
+    lv_name: "lv_centreon_backup",
+    require_lv_size: "10M",
+    fs: "xfs",
+    mount_point: "/var/lib/centreon/backup",
+    create_mount_point: true
+ }
+
+

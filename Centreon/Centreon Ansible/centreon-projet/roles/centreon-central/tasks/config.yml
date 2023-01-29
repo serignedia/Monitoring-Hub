@@ -1,0 +1,38 @@
+- name: Configuration PHP timezone
+  shell: echo "date.timezone = Europe/Paris" >> /etc/opt/rh/rh-php73/php.d/50-centreon.ini
+
+- name: Change files permissions
+  shell: chmod g+w {{ item }}
+  with_items:
+    - "/etc/centreon/conf.pm"
+    - "/etc/centreon/centreontrapd.pm"
+
+- name: Enable centreon central services
+  service: 
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+    - httpd24-httpd 
+    - snmpd 
+    - snmptrapd
+    - rh-php73-php-fpm 
+    - centreon
+    - gorgoned
+    - centreontrapd
+    - cbd
+    - centengine
+
+- name: Start services
+  service:
+    name: "{{ item }}"
+    state: started
+  with_items:
+    - httpd24-httpd 
+    - snmpd 
+    - snmptrapd
+    - rh-php73-php-fpm 
+    - centreon
+    - gorgoned
+    - centreontrapd
+    - cbd
+    - centengine

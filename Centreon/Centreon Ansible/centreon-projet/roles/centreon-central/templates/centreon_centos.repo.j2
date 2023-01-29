@@ -1,0 +1,14 @@
+[{{ centreon_local_repo_id }}]
+name=centreon centreonrepo
+baseurl={{ centreon_local_repo_dir }}
+gpgcheck=0
+enabled=1
+sslverify=0
+
+
+[centreon-stable]
+name=Centreon open source software repository.
+baseurl=https://yum.centreon.com/standard/21.04/el7/stable/$basearch/
+enabled=1
+gpgcheck=1
+sslverify=0

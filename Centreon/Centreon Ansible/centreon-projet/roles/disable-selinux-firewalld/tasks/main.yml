@@ -1,0 +1,13 @@
+- name: Disable selinux 
+  shell: sed -i s/^SELINUX=.*$/SELINUX=disabled/ /etc/selinux/config
+
+- name: Stop firewalld 
+  shell: systemctl stop firewalld
+
+- name: Disable firewalld 
+  shell: systemctl disable firewalld
+
+- name: Reboot host
+  reboot:
+    reboot_timeout: 600
+

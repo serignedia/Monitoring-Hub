@@ -1,0 +1,16 @@
+#- include: add_repo.yml
+
+- name: Install centreon-database
+  yum: 
+    name: centreon-database
+    state: present
+#    disablerepo: "*"
+#    enablerepo: "{{ centreon_local_repo_id }}"
+
+- name: Enable MariaDB service
+  service: 
+    name: mariadb
+    enabled: yes
+    
+- include: config.yml
+- include: mysql_secure_installation.yml
