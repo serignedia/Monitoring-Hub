@@ -1,0 +1,45 @@
+- name: Deploy nrpe packages
+  copy:
+    src: "{{ playbook_dir }}/files/packages/{{ item }}/"
+    dest: "/tmp"
+    mode: 0644
+  with_items:
+    - rpms
+    
+- name: Install packages.
+  yum:
+    name: 
+      - /tmp/centreon-nrpe3-daemon-3.2.0-1.el6.x86_64.rpm
+      - /tmp/centreon-nrpe3-plugin-3.2.0-1.el6.x86_64.rpm
+    state: present
+
+- name: Add centreon-engine group
+  group:
+    name: centreon-engine
+    gid: 6001
+    state: present
+    
+- name: Add the centreon-engine user
+  user:
+    name: centreon-engine
+    comment: Centreon-engine Admin
+    uid: 6001
+    shell: /bin/bash
+    group: centreon-engine
+    state: present
+    createhome: yes
+    home: /var/lib/centreon-engine
+
+- name: add centreon-engine user to group
+  command: usermod -a -G your_group centreon-engine
+
+- name: add nrpe dir for pid and log
+  command: mkdir -p /var/log/nrpe
+  
+- name: Enable centreon nrpe service
+  command: chkconfig --add centreon-nrpe3
+
+- name: restart nrpe
+  service:
+    name: centreon-nrpe3
+    state: started

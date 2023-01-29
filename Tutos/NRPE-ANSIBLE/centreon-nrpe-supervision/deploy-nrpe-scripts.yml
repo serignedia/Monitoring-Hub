@@ -1,0 +1,7 @@
+- hosts: centreon_nrpe_clients
+  become: true
+  become_method: sudo
+  become_flags: '-i'
+  tasks:
+    - name: Deploy centreon nrpe scripts and config
+      import_tasks: "{{ playbook_dir }}/common_tasks/centreon_nrpe_scripts_tasks.yml"

@@ -1,0 +1,18 @@
+- name: Deploy scripts
+  copy:
+    src: "{{ playbook_dir }}/files/scripts/{{ item }}/"
+    dest: "/usr/lib/centreon/plugins"
+    mode: 0755
+  with_items:
+    - scripts_centreon
+
+- name: Deploy nrpe config file (el6)
+  copy:
+    src: "{{ playbook_dir }}/files/configs/centreon_nrpe3.cfg"
+    dest: "/etc/nrpe/centreon-nrpe3.cfg"
+    mode: 0644
+  
+- name: restart nrpe
+  service:
+    name: centreon-nrpe3
+    state: restarted

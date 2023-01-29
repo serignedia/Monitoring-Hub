@@ -1,0 +1,6 @@
+- hosts: centreon_nrpe_clients
+  become: true
+  become_method: sudo
+  become_flags: '-i'
+  roles:
+    - centreon-nrpe-client-install
