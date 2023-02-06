@@ -6,7 +6,9 @@ Si vous avez une application et vous voulez envoyer des évènements à Centreon
 
 Dans le cadre de ce tuto, nous allons utiliser le client api postman pour construire nos requêtes et l'envoyer au serveur.
 
-# Télécharger puis installer le client post via le lien : https://www.postman.com/downloads/
+# Télécharger puis installer le client post via le lien :
+
+https://www.postman.com/downloads/
 
 # Autoriser à votre utilisateur centreon l'accès à l'api
 
