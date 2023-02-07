@@ -154,4 +154,4 @@ Sur postman vous pouvez constater que l'évènement a bien été envoyé avec ce
 
 **Centreon, API, Postman**
 
-**Serigne Saliou DIA**
+**_Serigne Saliou DIA_**
