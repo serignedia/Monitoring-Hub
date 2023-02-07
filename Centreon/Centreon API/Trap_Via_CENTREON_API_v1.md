@@ -12,13 +12,13 @@ https://www.postman.com/downloads/
 
 **Sur Centreon** 
 
-1. Autoriser à votre utilisateur centreon l'accès à l'api
+**1. Autoriser à votre utilisateur centreon l'accès à l'api**
 
 Créer un user puis donner lui les accès à l'api depuis : Configuration  >  Users  >  Contacts / Users puis sélectionner le contact et aller à l'onglet authentification
 
 ![image](https://user-images.githubusercontent.com/61230711/217044167-457f07b4-0b16-4f55-84f6-368c8109305a.png)
 
-2. Créer le service devant constistuer la trap
+**2. Créer le service devant constistuer la trap**
 
 ![image](https://user-images.githubusercontent.com/61230711/217050526-833ba13b-3675-457d-9425-13322c237cba.png)
 
