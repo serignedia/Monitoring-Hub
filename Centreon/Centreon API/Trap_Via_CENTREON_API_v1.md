@@ -149,3 +149,9 @@ Sur postman vous pouvez constater que l'évènement a bien été envoyé avec ce
  La documentation des champs via l'api v2
  
  https://docs-api.centreon.com/api/centreon-web/#tag/Submit/paths/~1monitoring~1hosts~1%7Bhost_id%7D~1submit/post
+
+
+
+# Centreon, API, Postman
+
+# ** Serigne Saliou DIA
