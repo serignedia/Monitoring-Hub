@@ -140,7 +140,7 @@ Sur postman vous pouvez constater que l'évènement a bien été envoyé avec ce
 
 
 
-# BRAVO : vous venez d'envoyer votre évènement à centreon via l'api v1
+**BRAVO : vous venez d'envoyer votre évènement à centreon via l'api v1**
 
 # Remarque :
  
@@ -152,6 +152,6 @@ Sur postman vous pouvez constater que l'évènement a bien été envoyé avec ce
 
 
 
-# Centreon, API, Postman
+**Centreon, API, Postman**
 
-# ** Serigne Saliou DIA
+**Serigne Saliou DIA**
